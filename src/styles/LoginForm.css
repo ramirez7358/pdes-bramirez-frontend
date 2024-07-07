@@ -1,0 +1,116 @@
+.twitter-btn {
+  color: white;
+  background-color: rgb(255, 230, 0);
+  border: 1px solid rgb(255, 230, 0);
+  /*border: 1px solid rgb(29, 161, 242);*/
+  width: 100%;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.twitter-btn:hover {
+  background-color: rgb(26, 140, 216);
+  border-color: rgb(26, 140, 216);
+}
+
+.twitter-btn:active {
+  background-color: rgb(13 118 189);
+  border-color: rgb(13 118 189);
+}
+
+.twitter:disabled {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.twitter-btn.twitter-btn-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.twitter-btn.twitter-btn-disabled:hover {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.twitter-input {
+  width: 100%;
+  height: 100%;
+  background: none;
+  padding-top: 20px !important;
+  border: none !important;
+  outline: 0px;
+}
+
+.input-box {
+  position: relative;
+  margin: 12px auto;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 10px 10px 50px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: none;
+  border-radius: 20px;
+  outline: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1em;
+  transition: 0.5s;
+}
+
+.input-box .invalid {
+  border: 1px solid red;
+}
+
+.input-box span {
+  position: absolute;
+  left: 0;
+  padding: 15px 10px 10px 50px;
+  pointer-events: none;
+  font-size: 0.75em;
+  color: rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.input-box input:valid ~ span,
+.input-box input:focus ~ span {
+  color: #1d2b3a;
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.65em;
+  padding: 2px 5px 0 5px;
+  border-left: 1px solid rgb(255, 230, 0);
+  border-right: 1px solid rgb(255, 230, 0);
+  border-radius: 4px;
+  background: rgb(255, 230, 0);
+  letter-spacing: 0.2em;
+  font-weight: bold;
+}
+
+.input-box input:valid,
+.input-box input:focus {
+  border: 1px solid rgb(255, 230, 0);
+}
+
+.icon-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 23px;
+  transform: translateY(-50%);
+  transition: 0.5s;
+}
+
+.error-message {
+  color: red;
+}
+
+.link-register {
+  text-decoration: none;
+}
