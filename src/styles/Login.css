@@ -1,0 +1,46 @@
+.authOptions ul {
+  position: relative;
+  padding: 0;
+}
+
+.authOptions ul li {
+  display: inline-block;
+  text-align: center;
+  width: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.authOptions ul li .form {
+  color: #000;
+  text-decoration: none;
+}
+
+.authOptions ul .animation {
+  position: absolute;
+  height: 3px;
+  bottom: 0;
+  z-index: 0;
+  background: rgb(255, 230, 0);
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.5s ease 0s;
+}
+
+.authOptions .startLogin,
+.authOptions ul li:nth-child(1):hover ~ .animation {
+  left: 0;
+}
+
+.authOptions .startRegister,
+.authOptions ul li:nth-child(2):hover ~ .animation {
+  left: 50%;
+}
+
+.sign-up-link {
+  color: #0d6efd;
+  text-decoration: underline;
+  cursor: pointer;
+}
