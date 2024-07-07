@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { FaKey } from "react-icons/fa";
@@ -7,16 +7,14 @@ import Input from "./Input";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginForm = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  const handleLogin = async (username, password) => {
-    console.log(username, password);
-  };
+  const { handleLogin } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +26,8 @@ const LoginForm = () => {
     setValidated(true);
 
     const body = Object.fromEntries(new FormData(form).entries());
+
+    console.log(body);
 
     toast.promise(handleLogin(body.username, body.password), {
       pending: "Connecting",

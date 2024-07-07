@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import Login from "../pages/Login";
+import Home from "../pages/Home";
 
 const Router = () => {
   const routes = useRoutes([
@@ -10,6 +11,10 @@ const Router = () => {
     {
       path: "/register",
       element: <Login isLoginForm={false} />,
+    },
+    {
+      path: "/home",
+      element: <Home />,
     },
   ]);
   return routes;
