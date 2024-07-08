@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { FaEnvelope } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
@@ -7,22 +7,14 @@ import { FaKey } from "react-icons/fa";
 import Input from "./Input";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
 const RegisterForm = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  const handleRegister = async (
-    username,
-    email,
-    password,
-    imageUrl,
-    backgroundUrl
-  ) => {
-    console.log("register");
-  };
+  const { handleRegister } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +32,8 @@ const RegisterForm = () => {
           body.email,
           body.password,
           body.imageurl,
-          body.backgroundurl
+          body.backgroundurl,
+          body.fullname
         ),
         {
           pending: "Connecting",
@@ -62,7 +55,7 @@ const RegisterForm = () => {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Input type="text" name="Username">
+      <Input type="text" name="Fullname">
         <FaUserCircle className="icon-placeholder" size={25} />
       </Input>
       <Input type="email" name="Email">
@@ -74,9 +67,9 @@ const RegisterForm = () => {
       <Input type="text" name="Image url">
         <FaImage className="icon-placeholder" size={25} />
       </Input>
-      <Input type="text" name="Background url">
+      {/*<Input type="text" name="Background url">
         <FaImage className="icon-placeholder" size={25} />
-      </Input>
+      </Input>*/}
       <button
         disabled={disabled}
         type="submit"
