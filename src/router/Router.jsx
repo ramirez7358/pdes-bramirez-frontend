@@ -16,6 +16,14 @@ const Router = () => {
       path: "/home",
       element: <Home />,
     },
+    {
+      path: "/bookmarks",
+      element: <Home />,
+    },
+    {
+      path: "/purchases",
+      element: <Home />,
+    },
   ]);
   return routes;
 };
