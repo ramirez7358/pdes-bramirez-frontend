@@ -5,7 +5,7 @@ import useMeliApiCall from "../hooks/meliApiHook";
 const AuthContext = createContext({
   jwt: "",
   handleLogin: async (email, password) => {},
-  handleRegister: async (username, email, password, image, background) => {},
+  handleRegister: async (username, email, password, image, fullName) => {},
   handleLogout: () => {},
 });
 
@@ -19,21 +19,8 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("jwt", jwt);
   };
 
-  const handleRegister = async (
-    username,
-    email,
-    password,
-    image,
-    background
-  ) => {
-    const jwt = await register(
-      username,
-      email,
-      password,
-      password,
-      image,
-      background
-    );
+  const handleRegister = async (username, email, password, image, fullName) => {
+    const jwt = await register(username, email, password, image, fullName);
     setJwt(jwt);
     localStorage.setItem("jwt", jwt);
   };

@@ -24,25 +24,21 @@ const useMeliApiCall = () => {
       return response.data.token;
     } catch (error) {
       const message = getErrorMessage(error);
-      console.log(error);
-      console.log(message);
       setIsLoading(false);
       throw new Error(message);
     }
   };
 
-  const register = async (username, email, password, image, background) => {
+  const register = async (username, email, password, image, fullName) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(`${API_URL}/register`, {
-        username,
-        email,
+      const response = await axios.post(`${API_URL}/auth/register`, {
+        email: email,
         password,
-        image,
-        backgroundImage: background,
+        fullName,
       });
       setIsLoading(false);
-      return response.headers.authorization;
+      return response.data.token;
     } catch (error) {
       const message = getErrorMessage(error);
       setIsLoading(false);
