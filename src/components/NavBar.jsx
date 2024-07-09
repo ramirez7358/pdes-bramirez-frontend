@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const NavBar = () => {
-  const { handleLogout } = useContext(AuthContext);
+  const { handleLogout, fullName } = useContext(AuthContext);
   return (
     <>
       <Navbar expand="lg" className="navbar-container justify-content-between">
@@ -16,26 +16,22 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link className="link" to={"/home"}>
-                  Home
-                </Link>
+              <Nav.Link as={Link} to={"/home"}>
+                Home
               </Nav.Link>
-              <Nav.Link>
-                <Link className="link" to={"/bookmarks"}>
-                  Bookmarks
-                </Link>
+              <Nav.Link as={Link} to={"/bookmarks"}>
+                Bookmarks
               </Nav.Link>
-              <Nav.Link>
-                <Link className="link" to={"/purchases"}>
-                  Purchases
-                </Link>
+              <Nav.Link as={Link} to={"/purchases"}>
+                Purchases
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className="fullname">Brian Ramirez</Navbar.Text>
-            <Link className="link">Signout</Link>
+            <Navbar.Text className="fullname">{fullName}</Navbar.Text>
+            <Link className="link" onClick={() => handleLogout()}>
+              Signout
+            </Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>
