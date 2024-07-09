@@ -27,8 +27,6 @@ const LoginForm = () => {
 
     const body = Object.fromEntries(new FormData(form).entries());
 
-    console.log(body);
-
     toast.promise(handleLogin(body.username, body.password), {
       pending: "Connecting",
       success: {
