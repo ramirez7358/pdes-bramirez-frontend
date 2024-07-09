@@ -4,11 +4,11 @@ import Home from "../pages/Home";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-const RequireAuth = ({ children }) => {
-  const { jwt } = useContext(AuthContext);
+const RequireAuth = ({ children, requiredRole }) => {
+  const { jwt, roles } = useContext(AuthContext);
   const location = useLocation();
 
-  if (!jwt) {
+  if (!jwt || (requiredRole && !roles.includes(requiredRole))) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 
@@ -30,7 +30,7 @@ const Router = () => {
     {
       path: "/home",
       element: (
-        <RequireAuth>
+        <RequireAuth requiredRole={"buyer"}>
           <Home />
         </RequireAuth>
       ),
@@ -38,7 +38,7 @@ const Router = () => {
     {
       path: "/bookmarks",
       element: (
-        <RequireAuth>
+        <RequireAuth requiredRole={"buyer"}>
           <Home />
         </RequireAuth>
       ),
@@ -46,7 +46,39 @@ const Router = () => {
     {
       path: "/purchases",
       element: (
-        <RequireAuth>
+        <RequireAuth requiredRole={"buyer"}>
+          <Home />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/users",
+      element: (
+        <RequireAuth requiredRole={"admin"}>
+          <Home />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/reports",
+      element: (
+        <RequireAuth requiredRole={"admin"}>
+          <Home />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/admin-bookmark",
+      element: (
+        <RequireAuth requiredRole={"admin"}>
+          <Home />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/admin-purchases",
+      element: (
+        <RequireAuth requiredRole={"admin"}>
           <Home />
         </RequireAuth>
       ),
