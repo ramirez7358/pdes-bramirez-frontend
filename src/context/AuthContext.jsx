@@ -4,6 +4,7 @@ import useMeliApiCall from "../hooks/meliApiHook";
 
 const AuthContext = createContext({
   jwt: "",
+  fullName,
   handleLogin: async (email, password) => {},
   handleRegister: async (username, email, password, image, fullName) => {},
   handleLogout: () => {},
@@ -11,10 +12,13 @@ const AuthContext = createContext({
 
 const AuthProvider = ({ children }) => {
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") || "");
+  const [fullName, setFullName] = useState(
+    localStorage.getItem("fullName") || ""
+  );
   const { login, register, isLoading } = useMeliApiCall();
 
   const handleLogin = async (email, password) => {
-    const jwt = await login(email, password);
+    const { token } = await login(email, password);
     setJwt(jwt);
     localStorage.setItem("jwt", jwt);
   };
@@ -32,7 +36,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ jwt, handleLogin, handleRegister, handleLogout }}
+      value={{ jwt, fullName, handleLogin, handleRegister, handleLogout }}
     >
       {isLoading && <Spinner />}
       {children}

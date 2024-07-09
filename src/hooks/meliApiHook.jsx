@@ -21,7 +21,7 @@ const useMeliApiCall = () => {
         password,
       });
       setIsLoading(false);
-      return response.data.token;
+      return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
       setIsLoading(false);
