@@ -13,6 +13,19 @@ const useMeliApiCall = () => {
     localStorage.removeItem("jwt");
   };
 
+  const getCategories = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/categories`);
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
   const login = async (username, password) => {
     try {
       setIsLoading(true);
@@ -51,6 +64,7 @@ const useMeliApiCall = () => {
     register,
     isLoading,
     resetJwt,
+    getCategories,
   };
 };
 

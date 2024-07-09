@@ -14,7 +14,7 @@ const NavBar = () => {
         <Container fluid>
           <Navbar.Brand href="#home">APC Mercadolibre</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          {roles.includes("buyerr") && (
+          {roles.includes("buyer") && (
             <Navbar id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={Link} to={"/home"}>
