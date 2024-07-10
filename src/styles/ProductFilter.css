@@ -1,0 +1,31 @@
+.product-filter-container {
+  background-color: #ebebeb;
+  padding-top: 5vh;
+}
+
+.search-button {
+  width: 100%;
+  font-size: large;
+  border: 2px solid #ffe600;
+  padding: 6px;
+  transition: all 0.5s;
+}
+
+.search-button:hover {
+  background-color: #ffe600;
+}
+
+.search-button:disabled {
+  background-color: grey;
+  border: 2px solid grey;
+  color: white; /* Ajusta esto si necesitas un color específico para el texto */
+  cursor: not-allowed;
+}
+
+.search-button:disabled:hover {
+  background-color: grey;
+}
+
+.search-button:disabled:active {
+  background-color: grey;
+}

@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [disabled, setDisabled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, roles } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,13 +27,13 @@ const LoginForm = () => {
 
     const body = Object.fromEntries(new FormData(form).entries());
 
-    console.log(body);
-
     toast.promise(handleLogin(body.username, body.password), {
       pending: "Connecting",
       success: {
         render() {
-          const from = location.state?.from?.pathname || "/home";
+          const from =
+            location.state?.from?.pathname ||
+            (roles.includes("buyer") ? "/home" : "/users");
           navigate(from, { replace: true });
         },
       },
