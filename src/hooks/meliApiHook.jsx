@@ -13,6 +13,76 @@ const useMeliApiCall = () => {
     localStorage.removeItem("jwt");
   };
 
+  const bookmarkProduct = async (productId, comment, score) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${API_URL}/bookmark`,
+        {
+          productId: productId,
+          comment: comment,
+          score: score,
+        },
+        { headers: { Authorization: `Bearer ${jwt}` } }
+      );
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const buyProduct = async (productId, price, count) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${API_URL}/purchase`,
+        {
+          productId: productId,
+          price: price,
+          count: count,
+        },
+        {
+          headers: { Authorization: `Bearer ${jwt}` },
+        }
+      );
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getProducts = async (categoryId) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `${API_URL}/product/${categoryId}?limit=10&offset=0`
+      );
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getCategories = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/categories`);
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
   const login = async (username, password) => {
     try {
       setIsLoading(true);
@@ -51,6 +121,10 @@ const useMeliApiCall = () => {
     register,
     isLoading,
     resetJwt,
+    getCategories,
+    getProducts,
+    buyProduct,
+    bookmarkProduct,
   };
 };
 
