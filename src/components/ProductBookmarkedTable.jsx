@@ -44,7 +44,6 @@ const ProductBookmarkedTable = ({ products }) => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Price</th>
               <th>Comment</th>
               <th>Score</th>
               <th></th>
@@ -55,7 +54,6 @@ const ProductBookmarkedTable = ({ products }) => {
               return (
                 <tr key={pts.id}>
                   <td>{pts.name}</td>
-                  <td>${pts.price}</td>
                   <td>{pts.comment}</td>
                   <td>{pts.score}</td>
                   <td>
