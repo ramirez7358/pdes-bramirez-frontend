@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Purchases from "../pages/Purchases";
+import Bookmarks from "../pages/Bookmarks";
 
 const RequireAuth = ({ children, requiredRole }) => {
   const { jwt, roles } = useContext(AuthContext);
@@ -40,7 +41,7 @@ const Router = () => {
       path: "/bookmarks",
       element: (
         <RequireAuth requiredRole={"buyer"}>
-          <Home />
+          <Bookmarks />
         </RequireAuth>
       ),
     },
