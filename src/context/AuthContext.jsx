@@ -36,7 +36,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleLogout = () => {
-    console.log("logout");
     setJwt("");
     setFullName("");
     setRoles([]);
