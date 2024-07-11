@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Purchases from "../pages/Purchases";
 import Bookmarks from "../pages/Bookmarks";
+import Reports from "../pages/Reports";
+import Users from "../pages/Users";
 
 const RequireAuth = ({ children, requiredRole }) => {
   const { jwt, roles } = useContext(AuthContext);
@@ -18,12 +20,20 @@ const RequireAuth = ({ children, requiredRole }) => {
 };
 
 const Router = () => {
-  const { jwt } = useContext(AuthContext);
+  const { jwt, roles } = useContext(AuthContext);
 
   const routes = useRoutes([
     {
       path: "/",
-      element: jwt ? <Navigate to="/home" /> : <Login isLoginForm={true} />,
+      element: jwt ? (
+        roles.includes("admin") ? (
+          <Navigate to="/reports" />
+        ) : (
+          <Navigate to="/home" />
+        )
+      ) : (
+        <Login isLoginForm={true} />
+      ),
     },
     {
       path: "/register",
@@ -54,10 +64,10 @@ const Router = () => {
       ),
     },
     {
-      path: "/users",
+      path: "/admin-users",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <Users />
         </RequireAuth>
       ),
     },
@@ -65,7 +75,7 @@ const Router = () => {
       path: "/reports",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <Reports />
         </RequireAuth>
       ),
     },

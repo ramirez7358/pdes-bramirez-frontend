@@ -32,7 +32,7 @@ const NavBar = () => {
           {roles.includes("admin") && (
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link as={Link} to={"/users"}>
+                <Nav.Link as={Link} to={"/admin-users"}>
                   Users
                 </Nav.Link>
                 <Nav.Link as={Link} to={"/reports"}>
