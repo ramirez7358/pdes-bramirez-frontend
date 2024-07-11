@@ -2,15 +2,16 @@ import "../styles/Home.css";
 import NavBar from "../components/NavBar";
 import ProductFilter from "../components/ProductFilter";
 import SearchProductResult from "../components/SearchProductResult";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useMeliApiCall from "../hooks/meliApiHook";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
 
-  const { getProducts } = useMeliApiCall();
+  const { getProducts, isLoading } = useMeliApiCall();
 
   return (
     <>
@@ -26,6 +27,7 @@ const Home = () => {
         position="bottom-center"
         theme="colored"
       />
+      {isLoading && <Spinner />}
     </>
   );
 };

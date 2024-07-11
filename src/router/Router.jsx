@@ -3,6 +3,12 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import Purchases from "../pages/Purchases";
+import Bookmarks from "../pages/Bookmarks";
+import Reports from "../pages/Reports";
+import Users from "../pages/Users";
+import AllBookmarks from "../pages/AllBookmarks";
+import AllPurchases from "../pages/AllPurchases";
 
 const RequireAuth = ({ children, requiredRole }) => {
   const { jwt, roles } = useContext(AuthContext);
@@ -16,12 +22,20 @@ const RequireAuth = ({ children, requiredRole }) => {
 };
 
 const Router = () => {
-  const { jwt } = useContext(AuthContext);
+  const { jwt, roles } = useContext(AuthContext);
 
   const routes = useRoutes([
     {
       path: "/",
-      element: jwt ? <Navigate to="/home" /> : <Login isLoginForm={true} />,
+      element: jwt ? (
+        roles.includes("admin") ? (
+          <Navigate to="/reports" />
+        ) : (
+          <Navigate to="/home" />
+        )
+      ) : (
+        <Login isLoginForm={true} />
+      ),
     },
     {
       path: "/register",
@@ -39,7 +53,7 @@ const Router = () => {
       path: "/bookmarks",
       element: (
         <RequireAuth requiredRole={"buyer"}>
-          <Home />
+          <Bookmarks />
         </RequireAuth>
       ),
     },
@@ -47,15 +61,15 @@ const Router = () => {
       path: "/purchases",
       element: (
         <RequireAuth requiredRole={"buyer"}>
-          <Home />
+          <Purchases />
         </RequireAuth>
       ),
     },
     {
-      path: "/users",
+      path: "/admin-users",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <Users />
         </RequireAuth>
       ),
     },
@@ -63,7 +77,7 @@ const Router = () => {
       path: "/reports",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <Reports />
         </RequireAuth>
       ),
     },
@@ -71,7 +85,7 @@ const Router = () => {
       path: "/admin-bookmark",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <AllBookmarks />
         </RequireAuth>
       ),
     },
@@ -79,7 +93,7 @@ const Router = () => {
       path: "/admin-purchases",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <AllPurchases />
         </RequireAuth>
       ),
     },

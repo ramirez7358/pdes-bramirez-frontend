@@ -13,6 +13,134 @@ const useMeliApiCall = () => {
     localStorage.removeItem("jwt");
   };
 
+  const getReports = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllPurchases = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/purchase`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllBookmarks = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/bookmark`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllUsers = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/user`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const createBookmark = async (bookmarkId, score, comment) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${API_URL}/bookmark`,
+        {
+          productId: bookmarkId,
+          comment: comment,
+          score: parseInt(score),
+        },
+        {
+          headers: { Authorization: `Bearer ${jwt}` },
+        }
+      );
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const deleteBookmark = async (bookmarkId) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.delete(`${API_URL}/bookmark/${bookmarkId}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getBookmarks = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/bookmark`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getPurchases = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/purchase`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
   const bookmarkProduct = async (productId, comment, score) => {
     try {
       setIsLoading(true);
@@ -25,6 +153,8 @@ const useMeliApiCall = () => {
         },
         { headers: { Authorization: `Bearer ${jwt}` } }
       );
+      setIsLoading(false);
+      return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
       setIsLoading(false);
@@ -59,7 +189,7 @@ const useMeliApiCall = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${API_URL}/product/${categoryId}?limit=10&offset=0`
+        `${API_URL}/product/${categoryId}?limit=12&offset=0`
       );
       setIsLoading(false);
       return response.data;
@@ -125,6 +255,14 @@ const useMeliApiCall = () => {
     getProducts,
     buyProduct,
     bookmarkProduct,
+    getPurchases,
+    getBookmarks,
+    deleteBookmark,
+    createBookmark,
+    getAllUsers,
+    getAllBookmarks,
+    getAllPurchases,
+    getReports,
   };
 };
 
