@@ -26,30 +26,20 @@ const RegisterForm = () => {
       const formData = new FormData(form);
       const body = Object.fromEntries(formData.entries());
 
-      toast.promise(
-        handleRegister(
-          body.username,
-          body.email,
-          body.password,
-          body.imageurl,
-          body.backgroundurl,
-          body.fullname
-        ),
-        {
-          pending: "Connecting",
-          success: {
-            render() {
-              const from = location.state?.from?.pathname || "/home";
-              navigate(from, { replace: true });
-            },
+      toast.promise(handleRegister(body.fullname, body.email, body.password), {
+        pending: "Connecting",
+        success: {
+          render() {
+            const from = location.state?.from?.pathname || "/home";
+            navigate(from, { replace: true });
           },
-          error: {
-            render({ data }) {
-              return data.message;
-            },
+        },
+        error: {
+          render({ data }) {
+            return data.message;
           },
-        }
-      );
+        },
+      });
     }
   };
 
@@ -64,9 +54,9 @@ const RegisterForm = () => {
       <Input type="password" name="Password">
         <FaKey className="icon-placeholder" size={25} />
       </Input>
-      <Input type="text" name="Image url">
+      {/* <Input type="text" name="Image url">
         <FaImage className="icon-placeholder" size={25} />
-      </Input>
+      </Input> */}
       {/*<Input type="text" name="Background url">
         <FaImage className="icon-placeholder" size={25} />
       </Input>*/}
