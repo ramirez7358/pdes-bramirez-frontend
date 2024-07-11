@@ -8,6 +8,7 @@ import Bookmarks from "../pages/Bookmarks";
 import Reports from "../pages/Reports";
 import Users from "../pages/Users";
 import AllBookmarks from "../pages/AllBookmarks";
+import AllPurchases from "../pages/AllPurchases";
 
 const RequireAuth = ({ children, requiredRole }) => {
   const { jwt, roles } = useContext(AuthContext);
@@ -92,7 +93,7 @@ const Router = () => {
       path: "/admin-purchases",
       element: (
         <RequireAuth requiredRole={"admin"}>
-          <Home />
+          <AllPurchases />
         </RequireAuth>
       ),
     },
