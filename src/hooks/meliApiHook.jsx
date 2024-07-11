@@ -13,6 +13,30 @@ const useMeliApiCall = () => {
     localStorage.removeItem("jwt");
   };
 
+  const createBookmark = async (bookmarkId, score, comment) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${API_URL}/bookmark`,
+        {
+          productId: bookmarkId,
+          comment: comment,
+          score: parseInt(score),
+        },
+        {
+          headers: { Authorization: `Bearer ${jwt}` },
+        }
+      );
+      setIsLoading(false);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
   const deleteBookmark = async (bookmarkId) => {
     try {
       setIsLoading(true);
@@ -106,7 +130,7 @@ const useMeliApiCall = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${API_URL}/product/${categoryId}?limit=10&offset=0`
+        `${API_URL}/product/${categoryId}?limit=12&offset=0`
       );
       setIsLoading(false);
       return response.data;
@@ -175,6 +199,7 @@ const useMeliApiCall = () => {
     getPurchases,
     getBookmarks,
     deleteBookmark,
+    createBookmark,
   };
 };
 
