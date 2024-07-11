@@ -40,7 +40,7 @@ const ProductBookmarkedTable = ({ products }) => {
   return (
     <div className="product-table-container">
       <Container>
-        <Table striped bordered hover>
+        <Table striped bordered hover id="bookmarked-table">
           <thead>
             <tr>
               <th>Name</th>

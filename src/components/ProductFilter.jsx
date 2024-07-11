@@ -42,6 +42,7 @@ const ProductFilter = ({ onFilter }) => {
             <Form.Group as={Col} controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Select
+                id="search-select"
                 aria-label="Default select example"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
