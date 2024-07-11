@@ -13,6 +13,66 @@ const useMeliApiCall = () => {
     localStorage.removeItem("jwt");
   };
 
+  const getReports = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllPurchases = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/purchase`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllBookmarks = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/bookmark`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
+  const getAllUsers = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/reports/user`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+      setIsLoading(false);
+      return response.data.data;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      setIsLoading(false);
+      throw new Error(message);
+    }
+  };
+
   const createBookmark = async (bookmarkId, score, comment) => {
     try {
       setIsLoading(true);
@@ -28,7 +88,6 @@ const useMeliApiCall = () => {
         }
       );
       setIsLoading(false);
-      console.log(response);
       return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
@@ -200,6 +259,10 @@ const useMeliApiCall = () => {
     getBookmarks,
     deleteBookmark,
     createBookmark,
+    getAllUsers,
+    getAllBookmarks,
+    getAllPurchases,
+    getReports,
   };
 };
 

@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 import useMeliApiCall from "../hooks/meliApiHook";
-import ProductTable from "../components/ProductTable";
 import ProductBookmarkedTable from "../components/ProductBookmarkedTable";
 
 const Bookmarks = () => {
