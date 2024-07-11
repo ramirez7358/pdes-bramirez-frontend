@@ -7,7 +7,7 @@ const AuthContext = createContext({
   fullName: "",
   roles: [],
   handleLogin: async (email, password) => {},
-  handleRegister: async (username, email, password, image, fullName) => {},
+  handleRegister: async (fullName, email, password) => {},
   handleLogout: () => {},
 });
 
@@ -29,10 +29,15 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("roles", response.roles);
   };
 
-  const handleRegister = async (username, email, password, image, fullName) => {
-    const jwt = await register(username, email, password, image, fullName);
-    setJwt(jwt);
-    localStorage.setItem("jwt", jwt);
+  const handleRegister = async (fullName, email, password) => {
+    const response = await register(fullName, email, password);
+    console.log(response);
+    setJwt(response.token);
+    setFullName(response.fullName);
+    setRoles(response.roles);
+    localStorage.setItem("jwt", response.token);
+    localStorage.setItem("fullName", response.fullName);
+    localStorage.setItem("roles", response.roles);
   };
 
   const handleLogout = () => {

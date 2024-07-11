@@ -229,7 +229,7 @@ const useMeliApiCall = () => {
     }
   };
 
-  const register = async (username, email, password, image, fullName) => {
+  const register = async (fullName, email, password) => {
     try {
       setIsLoading(true);
       const response = await axios.post(`${API_URL}/auth/register`, {
@@ -238,7 +238,7 @@ const useMeliApiCall = () => {
         fullName,
       });
       setIsLoading(false);
-      return response.data.token;
+      return response.data;
     } catch (error) {
       const message = getErrorMessage(error);
       setIsLoading(false);
