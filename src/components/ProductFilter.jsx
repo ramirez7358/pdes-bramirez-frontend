@@ -11,7 +11,7 @@ const ProductFilter = ({ onFilter }) => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
-  const { getCategories, isLoading } = useMeliApiCall();
+  const { getCategories } = useMeliApiCall();
 
   useEffect(() => {
     getCategories().then((response) => {
